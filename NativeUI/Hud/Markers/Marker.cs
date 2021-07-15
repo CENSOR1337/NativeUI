@@ -21,7 +21,7 @@ namespace NativeUI
 		public bool Rotate { get; set; }
 		public bool FaceCamera { get; set; }
 		public bool IsInMarker { get; private set; }
-		public bool IsInRange { get; private set; }
+		public bool IsInRange { get => MenuPool.PlayerPed.IsInRangeOf(Position, Distance); }
 
 		/// <summary>
 		/// Creates a Marker in a world position
@@ -73,11 +73,8 @@ namespace NativeUI
 
 		public void Draw()
 		{
-			Ped playerPed = new Ped(PlayerPedId());
-			IsInRange = playerPed.IsInRangeOf(Position, Distance);
-			if (!IsInRange) return;
 			World.DrawMarker(MarkerType, Position, Direction, Rotation, Scale, Color, BobUpDown, FaceCamera, Rotate);
-			var dist = Vector3.Distance(Position, Game.PlayerPed.Position);
+			var dist = Vector3.Distance(Position, MenuPool.PlayerPed.Position);
 			IsInMarker = dist <= (Scale / 2).X || dist <= (Scale / 2).Y || dist <= (Scale / 2).Z;
 		}
 	}

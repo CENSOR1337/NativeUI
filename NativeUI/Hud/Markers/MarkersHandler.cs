@@ -12,6 +12,7 @@ namespace NativeUI
 	{
 
 		private static List<Marker> _markerList = new List<Marker>();
+
 		public MarkersHandler()
 		{
 			Tick += MainHandler;
@@ -20,10 +21,13 @@ namespace NativeUI
 		public async Task MainHandler()
 		{
 			if (_markerList.Count == 0) return;
-			for(int i=0; i<_markerList.ToList().Count; i++)
-				_markerList[i].Draw();
+
+			for(int i=0; i<FilterMarkers().Count; i++)
+				FilterMarkers()[i].Draw();
 			await Task.FromResult(0);
 		}
+
+		private List<Marker> FilterMarkers() => _markerList.Where(x => MenuPool.PlayerPed.IsInRangeOf(x.Position, x.Distance)).ToList();
 
 		/// <summary>
 		/// Adds a marker to the list
