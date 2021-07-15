@@ -19,7 +19,6 @@ namespace NativeUI
 
 		public async Task MainHandler()
 		{
-			Debug.WriteLine(_markerList.Count.ToString());
 			if (_markerList.Count == 0) return;
 			for(int i=0; i<_markerList.ToList().Count; i++)
 				_markerList[i].Draw();

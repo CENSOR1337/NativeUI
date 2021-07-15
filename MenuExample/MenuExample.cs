@@ -742,7 +742,7 @@ public class MenuExample : BaseScript
 		_menuPool.RefreshIndex();
 
 		// We create a marker on the peds position, adds it to the MarkerHandler
-		Marker playerMarker = new Marker(MarkerType.VerticalCylinder, Game.PlayerPed.Position, new Vector3(1.5f), 5f, Colors.AliceBlue);
+		Marker playerMarker = new Marker(MarkerType.VerticalCylinder, Game.PlayerPed.Position, new Vector3(1.5f), 5f, Colors.Cyan);
 		MarkersHandler.AddMarker(playerMarker);
 
 		Tick += async () =>
