@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hud\NotificationIcons.cs" />
+    <Compile Include="Hud\NotificationChars.cs" />
     <Compile Include="Hud\Notifications.cs" />
     <Compile Include="Scaleforms\BigMessage\BigMessage.cs" />
     <Compile Include="Controls.cs" />
