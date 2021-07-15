@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hud\NotificationChars.cs" />
-    <Compile Include="Hud\Notifications.cs" />
+    <Compile Include="Hud\Markers\Marker.cs" />
+    <Compile Include="Hud\Markers\MarkersHandler.cs" />
+    <Compile Include="Hud\Notifications\NotificationChars.cs" />
+    <Compile Include="Hud\Notifications\Notifications.cs" />
     <Compile Include="Scaleforms\BigMessage\BigMessage.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Elements\Sprite.cs" />
