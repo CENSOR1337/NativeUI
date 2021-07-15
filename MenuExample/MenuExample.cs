@@ -741,9 +741,18 @@ public class MenuExample : BaseScript
 		HandleMenuEvents(mainMenu);
 		_menuPool.RefreshIndex();
 
+		// We create a marker on the peds position, adds it to the MarkerHandler
+		Marker playerMarker = new Marker(MarkerType.VerticalCylinder, Game.PlayerPed.Position, new Vector3(1.5f), 5f, Colors.AliceBlue);
+		MarkersHandler.AddMarker(playerMarker);
+
 		Tick += async () =>
 		{
 			_menuPool.ProcessMenus();
+
+			//If the player is in drawing range for the marker, the marker will draw automatically and the DrawText will show itself (true if the ped enters the marker)
+			if(playerMarker.IsInRange)
+				Notifications.DrawText($"IsInMarker => {playerMarker.IsInMarker}");
+
 			if (Game.IsControlJustPressed(0, Control.SelectCharacterMichael)) // Our menu on/off switch
 				mainMenu.Visible = !mainMenu.Visible;
 			await Task.FromResult(0);
