@@ -49,7 +49,6 @@
     <Compile Include="Scaleforms\BigMessage\BigMessage.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Elements\Sprite.cs" />
-    <Compile Include="Elements\TimerBars.cs" />
     <Compile Include="Elements\UIResRectangle.cs" />
     <Compile Include="Elements\UIResText.cs" />
     <Compile Include="Items\UIMenuProgressItem.cs" />
@@ -86,6 +85,10 @@
     <Compile Include="Scaleforms\PopupWarning\PopupWarning.cs" />
     <Compile Include="ScreenTools.cs" />
     <Compile Include="StringMeasurer.cs" />
+    <Compile Include="TimerBars\Bars\ProgressTimerBar.cs" />
+    <Compile Include="TimerBars\Bars\TextTimerBar.cs" />
+    <Compile Include="TimerBars\Bars\TimerBarBase.cs" />
+    <Compile Include="TimerBars\TimerBarPool.cs" />
     <Compile Include="UIMenu.cs" />
     <Compile Include="Windows\UIMenuHeritageWindow.cs" />
     <Compile Include="Windows\UIMenuWindow.cs" />
