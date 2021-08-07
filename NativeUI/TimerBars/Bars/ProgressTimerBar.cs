@@ -44,7 +44,7 @@ namespace NativeUI
             _background.Position = start;
             _foreground.Position = start;
 
-            _foreground.Size = new SizeF((int)(150 * Percentage), 15);
+            _foreground.Size = new SizeF(150 * Percentage, 15);
 
             // In case someone decides to change colors while drawing..
             _background.Color = BackgroundColor;
