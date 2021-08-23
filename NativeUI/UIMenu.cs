@@ -1303,7 +1303,7 @@ namespace NativeUI
 		private float CalculateItemHeight()
 		{
 			float ItemOffset = 0 + _mainMenu.Items[1].Position.Y - 37f;
-			for (int i = 0; i < MenuItems.Count; i++)
+			for (int i = 0; i < (MenuItems.Count < MaxItemsOnScreen ? MenuItems.Count : MaxItemsOnScreen); i++)
 				ItemOffset += MenuItems[i]._rectangle.Size.Height;
 			return ItemOffset;
 		}
@@ -1313,9 +1313,9 @@ namespace NativeUI
 		/// </summary>
 		private float CalculatePanelsPosition(bool hasDescription)
 		{
-			float Height = CalculateWindowHeight() + 40 + _mainMenu.Position.Y;
+			float Height = CalculateWindowHeight() + 126 + _mainMenu.Position.Y;
 			if (hasDescription)
-				Height += _descriptionRectangle.Size.Height + 5;
+				Height += _descriptionRectangle.Size.Height + 5;			
 			return CalculateItemHeight() + Height;
 		}
 

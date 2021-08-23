@@ -56,21 +56,21 @@ namespace NativeUI
 
 		internal override void Position(float y)
 		{
-			float Y = y;
-			var ParentOffsetX = ParentItem.Offset.X;
-			var ParentOffsetWidth = ParentItem.Parent.WidthOffset;
+			float Y = y + 35;
+			float ParentOffsetX = ParentItem.Offset.X;
+			int ParentOffsetWidth = ParentItem.Parent.WidthOffset;
 			Background.Position = new PointF(ParentOffsetX, Y);
-			for (int i=0; i<Items.Count; i++)
+			for (int i = 0; i < Items.Count; i++)
 			{
-				var OffsetItemCount = 40 * (i + 1);
+				int OffsetItemCount = 40 * (i + 1);
 				Items[i].Text.Position = new PointF(ParentOffsetX + (ParentOffsetWidth / 2) + 13, Y - 34 + OffsetItemCount);
 				Items[i].BackgroundProgressBar.Position = new PointF(ParentOffsetX + (ParentOffsetWidth / 2) + 200, Y - 22 + OffsetItemCount);
 				Items[i].ProgressBar.Position = new PointF(ParentOffsetX + (ParentOffsetWidth / 2) + 200, Y - 22 + OffsetItemCount);
 				if (Divider)
 				{
-					for (int _=0; _<Items[i].Divider.Length; _++)
+					for (int _ = 0; _ < Items[i].Divider.Length; _++)
 					{
-						var DividerOffsetWidth = _ * 40;
+						int DividerOffsetWidth = _ * 40;
 						Items[i].Divider[_].Position = new PointF(ParentOffsetX + (ParentOffsetWidth / 2) + 200 + DividerOffsetWidth, Y - 22 + OffsetItemCount);
 						Background.Size = new SizeF(431 + ParentItem.Parent.WidthOffset, 47 + OffsetItemCount - 39);
 					}
