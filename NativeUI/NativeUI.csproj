@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CitizenFX.Core.Client, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CitizenFX.Core.Client.1.0.4075\lib\net45\CitizenFX.Core.Client.dll</HintPath>
+      <HintPath>..\packages\CitizenFX.Core.Client.1.0.4207\lib\net45\CitizenFX.Core.Client.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -42,10 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hud\Markers\Marker.cs" />
+    <Compile Include="Hud\Markers\MarkersHandler.cs" />
+    <Compile Include="Hud\Notifications\NotificationChars.cs" />
+    <Compile Include="Hud\Notifications\Notifications.cs" />
     <Compile Include="Scaleforms\BigMessage\BigMessage.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Elements\Sprite.cs" />
-    <Compile Include="Elements\TimerBars.cs" />
     <Compile Include="Elements\UIResRectangle.cs" />
     <Compile Include="Elements\UIResText.cs" />
     <Compile Include="Items\UIMenuProgressItem.cs" />
@@ -82,6 +85,10 @@
     <Compile Include="Scaleforms\PopupWarning\PopupWarning.cs" />
     <Compile Include="ScreenTools.cs" />
     <Compile Include="StringMeasurer.cs" />
+    <Compile Include="TimerBars\Bars\ProgressTimerBar.cs" />
+    <Compile Include="TimerBars\Bars\TextTimerBar.cs" />
+    <Compile Include="TimerBars\Bars\TimerBarBase.cs" />
+    <Compile Include="TimerBars\TimerBarPool.cs" />
     <Compile Include="UIMenu.cs" />
     <Compile Include="Windows\UIMenuHeritageWindow.cs" />
     <Compile Include="Windows\UIMenuWindow.cs" />

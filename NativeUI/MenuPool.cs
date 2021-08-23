@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using CitizenFX.Core;
+using CitizenFX.Core.Native;
 using NativeUI.PauseMenu;
 using Control = CitizenFX.Core.Control;
 
@@ -14,6 +16,20 @@ namespace NativeUI
     /// </summary>
     public class MenuPool
     {
+        private static Ped _ped;
+        internal static Ped PlayerPed { get
+			{
+                int handle = API.PlayerPedId();
+
+                if (_ped is null || handle != _ped.Handle)
+                {
+                    _ped = new Ped(handle);
+                }
+
+                return _ped;
+            }
+        }
+
         public bool MouseEdgeEnabled { set { _menuList.ForEach(m => m.MouseEdgeEnabled = value); } }
 
         public bool ControlDisablingEnabled { set { _menuList.ForEach(m => m.ControlDisablingEnabled = value); } }

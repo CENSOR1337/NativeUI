@@ -7,6 +7,7 @@ using NativeUI;
 using NativeUI.PauseMenu;
 using CitizenFX.Core.Native;
 using System.Linq;
+using System.Threading.Tasks;
 
 public class MenuExample : BaseScript
 {
@@ -23,7 +24,7 @@ public class MenuExample : BaseScript
 			if (item == newitem)
 			{
 				ketchup = checked_;
-				Screen.ShowNotification("~r~Ketchup status: ~b~" + ketchup);
+				Notifications.ShowNotification("~r~Ketchup status: ~b~" + ketchup);
 			}
 		};
 	}
@@ -45,7 +46,7 @@ public class MenuExample : BaseScript
 			if (item == newitem)
 			{
 				dish = item.Items[index].ToString();
-				Screen.ShowNotification("Preparing ~b~" + dish + "~w~...");
+				Notifications.ShowNotification("Preparing ~b~" + dish + "~w~...");
 			}
 
 		};
@@ -87,7 +88,7 @@ public class MenuExample : BaseScript
 		{
 			if (_item == newItem)
 			{
-				Screen.ShowNotification("Wow the slider changed! Who do i look like??");
+				Notifications.ShowNotification("Wow the slider changed! Who do i look like??");
 			}
 		};
 	}
@@ -144,6 +145,444 @@ public class MenuExample : BaseScript
 			if (InstructionalButtonsHandler.InstructionalButtons.IsSaving) return;
 			InstructionalButtonsHandler.InstructionalButtons.AddSavingText((LoadingSpinnerType)(index + 1), "I'm a saving text", 3000);
 		};
+	}
+
+	public void NotificationShowdown(UIMenu menu)
+	{
+		UIMenu notifications = _menuPool.AddSubMenu(menu, "Notifications Showdown");
+		var colors = Enum.GetNames(typeof(NotificationColor)).ToList<dynamic>();
+		colors.Add("Classic");
+		var char_sprites = new List<dynamic>() { "Abigail", "Amanda", "Ammunation", "Andreas", "Antonia", "Ashley", "BankOfLiberty", "BankFleeca", "BankMaze", "Barry", "Beverly", "BikeSite", "BlankEntry", "Blimp", "Blocked", "BoatSite", "BrokenDownGirl", "BugStars", "Call911", "LegendaryMotorsport", "SSASuperAutos", "Castro", "ChatCall", "Chef", "Cheng", "ChengSenior", "Chop", "Cris", "Dave", "Default", "Denise", "DetonateBomb", "DetonatePhone", "Devin", "SubMarine", "Dom", "DomesticGirl", "Dreyfuss", "DrFriedlander", "Epsilon", "EstateAgent", "Facebook", "FilmNoire", "Floyd", "Franklin", "FranklinTrevor", "GayMilitary", "Hao", "HitcherGirl", "Hunter", "Jimmy", "JimmyBoston", "Joe", "Josef", "Josh", "LamarDog", "Lester", "Skull", "LesterFranklin", "LesterMichael", "LifeInvader", "LsCustoms", "LSTI", "Manuel", "Marnie", "Martin", "MaryAnn", "Maude", "Mechanic", "Michael", "MichaelFranklin", "MichaelTrevor", "WarStock", "Minotaur", "Molly", "MorsMutual", "ArmyContact", "Brucie", "FibContact", "RockStarLogo", "Gerald", "Julio", "MechanicChinese", "MerryWeather", "Unicorn", "Mom", "MrsThornhill", "PatriciaTrevor", "PegasusDelivery", "ElitasTravel", "Sasquatch", "Simeon", "SocialClub", "Solomon", "Taxi", "Trevor", "YouTube", "Wade" };
+
+		var noti1 = new UIMenuListItem("Simple Notification", colors, colors.Count - 1, "Can be colored too! Change color and / or select this item to show the notification.");
+		var noti2 = new UIMenuListItem("Advanced Notification", char_sprites, 0, "Change the char and see the notification example! (It can be colored too like the simple notification)");
+		var noti3 = new UIMenuItem("Help Notification", "Insert your text and see the example, you can insert buttons using ~INPUT_NAME~ (for example try using ~INPUT_CONTEXT~ and you'll get the E button)");
+		var noti4 = new UIMenuItem("Floating Help Notification", "This is tricky, it's a 3D notification, you'll have to input a Vector3 to show it!");
+		var noti5 = new UIMenuItem("Stats Notification", "This is the notification you see in GTA:O when you improve one of your skills.");
+		var noti6 = new UIMenuItem("VS Notification", "This is the notification you see in GTA:O when you kill someone or get revenge.");
+		var noti7 = new UIMenuItem("3D Text", "This is known a lot.. let's you draw a 3D text in a precise world coordinates.");
+		var noti8 = new UIMenuItem("Simple Text", "This will let you draw a 2D text on screen, you'll have to input the 2D  (X, Y) coordinates.");
+		notifications.AddItem(noti1);
+		notifications.AddItem(noti2);
+		notifications.AddItem(noti3);
+		notifications.AddItem(noti4);
+		notifications.AddItem(noti5);
+		notifications.AddItem(noti6);
+		notifications.AddItem(noti7);
+		notifications.AddItem(noti8);
+
+		NativeUI.NativeUINotification notification = null;
+		notifications.OnListChange += (_menu, _item, _index) =>
+		{
+			if(_item == noti1)
+			{
+				if (notification != null)
+					notification.Hide();
+				if (_index == (colors.Count - 1))
+					notification = Notifications.ShowNotification("This is a simple notification without color and look how long it is wooow!", true, true);
+				else
+				{
+					switch (_index)
+					{
+						case 0:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.Gold, true, true);
+							break;
+						case 1:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.Red, true, true);
+							break;
+						case 2:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.Rose, true, true);
+							break;
+						case 3:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.GreenLight, true, true);
+							break;
+						case 4:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.GreenDark, true, true);
+							break;
+						case 5:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.Cyan, true, true);
+							break;
+						case 6:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.Purple, true, true);
+							break;
+						case 7:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.Yellow, true, true);
+							break;
+						case 8:
+							notification = Notifications.ShowNotification("This is a simple colored notification and look how long it is wooow!", NotificationColor.Blue, true, true);
+							break;
+					}
+				}
+			}
+			else if (_item == noti2)
+			{
+				string selectedChar = NotificationChar.Abigail;
+				#region SwitchStatement
+				switch (_item.Items[_index])
+				{
+					case "Abigail":
+						selectedChar = NotificationChar.Abigail;
+						break;
+					case "Amanda":
+						selectedChar = NotificationChar.Amanda;
+						break;
+					case "Ammunation":
+						selectedChar = NotificationChar.Ammunation;
+						break;
+					case "Andreas":
+						selectedChar = NotificationChar.Andreas;
+						break;
+					case "Antonia":
+						selectedChar = NotificationChar.Antonia;
+						break;
+					case "Ashley":
+						selectedChar = NotificationChar.Ashley;
+						break;
+					case "BankOfLiberty":
+						selectedChar = NotificationChar.BankOfLiberty;
+						break;
+					case "BankFleeca":
+						selectedChar = NotificationChar.BankFleeca;
+						break;
+					case "BankMaze":
+						selectedChar = NotificationChar.BankMaze;
+						break;
+					case "Barry":
+						selectedChar = NotificationChar.Barry;
+						break;
+					case "Beverly":
+						selectedChar = NotificationChar.Beverly;
+						break;
+					case "BikeSite":
+						selectedChar = NotificationChar.BikeSite;
+						break;
+					case "BlankEntry":
+						selectedChar = NotificationChar.BlankEntry;
+						break;
+					case "Blimp":
+						selectedChar = NotificationChar.Blimp;
+						break;
+					case "Blocked":
+						selectedChar = NotificationChar.Blocked;
+						break;
+					case "BoatSite":
+						selectedChar = NotificationChar.BoatSite;
+						break;
+					case "BrokenDownGirl":
+						selectedChar = NotificationChar.BrokenDownGirl;
+						break;
+					case "BugStars":
+						selectedChar = NotificationChar.BugStars;
+						break;
+					case "Call911":
+						selectedChar = NotificationChar.Call911;
+						break;
+					case "LegendaryMotorsport":
+						selectedChar = NotificationChar.LegendaryMotorsport;
+						break;
+					case "SSASuperAutos":
+						selectedChar = NotificationChar.SSASuperAutos;
+						break;
+					case "Castro":
+						selectedChar = NotificationChar.Castro;
+						break;
+					case "ChatCall":
+						selectedChar = NotificationChar.ChatCall;
+						break;
+					case "Chef":
+						selectedChar = NotificationChar.Chef;
+						break;
+					case "Cheng":
+						selectedChar = NotificationChar.Cheng;
+						break;
+					case "ChengSenior":
+						selectedChar = NotificationChar.ChengSenior;
+						break;
+					case "Chop":
+						selectedChar = NotificationChar.Chop;
+						break;
+					case "Cris":
+						selectedChar = NotificationChar.Cris;
+						break;
+					case "Dave":
+						selectedChar = NotificationChar.Dave;
+						break;
+					case "Default":
+						selectedChar = NotificationChar.Default;
+						break;
+					case "Denise":
+						selectedChar = NotificationChar.Denise;
+						break;
+					case "DetonateBomb":
+						selectedChar = NotificationChar.DetonateBomb;
+						break;
+					case "DetonatePhone":
+						selectedChar = NotificationChar.DetonatePhone;
+						break;
+					case "Devin":
+						selectedChar = NotificationChar.Devin;
+						break;
+					case "SubMarine":
+						selectedChar = NotificationChar.SubMarine;
+						break;
+					case "Dom":
+						selectedChar = NotificationChar.Dom;
+						break;
+					case "DomesticGirl":
+						selectedChar = NotificationChar.DomesticGirl;
+						break;
+					case "Dreyfuss":
+						selectedChar = NotificationChar.Dreyfuss;
+						break;
+					case "DrFriedlander":
+						selectedChar = NotificationChar.DrFriedlander;
+						break;
+					case "Epsilon":
+						selectedChar = NotificationChar.Epsilon;
+						break;
+					case "EstateAgent":
+						selectedChar = NotificationChar.EstateAgent;
+						break;
+					case "Facebook":
+						selectedChar = NotificationChar.Facebook;
+						break;
+					case "FilmNoire":
+						selectedChar = NotificationChar.FilmNoire;
+						break;
+					case "Floyd":
+						selectedChar = NotificationChar.Floyd;
+						break;
+					case "Franklin":
+						selectedChar = NotificationChar.Franklin;
+						break;
+					case "FranklinTrevor":
+						selectedChar = NotificationChar.FranklinTrevor;
+						break;
+					case "GayMilitary":
+						selectedChar = NotificationChar.GayMilitary;
+						break;
+					case "Hao":
+						selectedChar = NotificationChar.Hao;
+						break;
+					case "HitcherGirl":
+						selectedChar = NotificationChar.HitcherGirl;
+						break;
+					case "Hunter":
+						selectedChar = NotificationChar.Hunter;
+						break;
+					case "Jimmy":
+						selectedChar = NotificationChar.Jimmy;
+						break;
+					case "JimmyBoston":
+						selectedChar = NotificationChar.JimmyBoston;
+						break;
+					case "Joe":
+						selectedChar = NotificationChar.Joe;
+						break;
+					case "Josef":
+						selectedChar = NotificationChar.Josef;
+						break;
+					case "Josh":
+						selectedChar = NotificationChar.Josh;
+						break;
+					case "LamarDog":
+						selectedChar = NotificationChar.LamarDog;
+						break;
+					case "Lester":
+						selectedChar = NotificationChar.Lester;
+						break;
+					case "Skull":
+						selectedChar = NotificationChar.Skull;
+						break;
+					case "LesterFranklin":
+						selectedChar = NotificationChar.LesterFranklin;
+						break;
+					case "LesterMichael":
+						selectedChar = NotificationChar.LesterMichael;
+						break;
+					case "LifeInvader":
+						selectedChar = NotificationChar.LifeInvader;
+						break;
+					case "LsCustoms":
+						selectedChar = NotificationChar.LsCustoms;
+						break;
+					case "LSTI":
+						selectedChar = NotificationChar.LSTI;
+						break;
+					case "Manuel":
+						selectedChar = NotificationChar.Manuel;
+						break;
+					case "Marnie":
+						selectedChar = NotificationChar.Marnie;
+						break;
+					case "Martin":
+						selectedChar = NotificationChar.Martin;
+						break;
+					case "MaryAnn":
+						selectedChar = NotificationChar.MaryAnn;
+						break;
+					case "Maude":
+						selectedChar = NotificationChar.Maude;
+						break;
+					case "Mechanic":
+						selectedChar = NotificationChar.Mechanic;
+						break;
+					case "Michael":
+						selectedChar = NotificationChar.Michael;
+						break;
+					case "MichaelFranklin":
+						selectedChar = NotificationChar.MichaelFranklin;
+						break;
+					case "MichaelTrevor":
+						selectedChar = NotificationChar.MichaelTrevor;
+						break;
+					case "WarStock":
+						selectedChar = NotificationChar.WarStock;
+						break;
+					case "Minotaur":
+						selectedChar = NotificationChar.Minotaur;
+						break;
+					case "Molly":
+						selectedChar = NotificationChar.Molly;
+						break;
+					case "MorsMutual":
+						selectedChar = NotificationChar.MorsMutual;
+						break;
+					case "ArmyContact":
+						selectedChar = NotificationChar.ArmyContact;
+						break;
+					case "Brucie":
+						selectedChar = NotificationChar.Brucie;
+						break;
+					case "FibContact":
+						selectedChar = NotificationChar.FibContact;
+						break;
+					case "RockStarLogo":
+						selectedChar = NotificationChar.RockStarLogo;
+						break;
+					case "Gerald":
+						selectedChar = NotificationChar.Gerald;
+						break;
+					case "Julio":
+						selectedChar = NotificationChar.Julio;
+						break;
+					case "MechanicChinese":
+						selectedChar = NotificationChar.MechanicChinese;
+						break;
+					case "MerryWeather":
+						selectedChar = NotificationChar.MerryWeather;
+						break;
+					case "Unicorn":
+						selectedChar = NotificationChar.Unicorn;
+						break;
+					case "Mom":
+						selectedChar = NotificationChar.Mom;
+						break;
+					case "MrsThornhill":
+						selectedChar = NotificationChar.MrsThornhill;
+						break;
+					case "PatriciaTrevor":
+						selectedChar = NotificationChar.PatriciaTrevor;
+						break;
+					case "PegasusDelivery":
+						selectedChar = NotificationChar.PegasusDelivery;
+						break;
+					case "ElitasTravel":
+						selectedChar = NotificationChar.ElitasTravel;
+						break;
+					case "Sasquatch":
+						selectedChar = NotificationChar.Sasquatch;
+						break;
+					case "Simeon":
+						selectedChar = NotificationChar.Simeon;
+						break;
+					case "SocialClub":
+						selectedChar = NotificationChar.SocialClub;
+						break;
+					case "Solomon":
+						selectedChar = NotificationChar.Solomon;
+						break;
+					case "Taxi":
+						selectedChar = NotificationChar.Taxi;
+						break;
+					case "Trevor":
+						selectedChar = NotificationChar.Trevor;
+						break;
+					case "YouTube":
+						selectedChar = NotificationChar.YouTube;
+						break;
+					case "Wade":
+						selectedChar = NotificationChar.Wade;
+						break;
+				}
+				#endregion
+				if (notification != null) notification.Hide();
+				notification = Notifications.ShowAdvancedNotification("This is the title!!", "This is the subtitle!", "This is the main text!!", selectedChar, selectedChar, HudColor.NONE, Colors.AliceBlue, true, NotificationType.Default, true, true);
+			}
+		};
+
+		notifications.OnItemSelect += async (_menu, _item, _index) =>
+		{
+			API.AddTextEntry("FMMC_KEY_TIP8", "Insert text (Max 50 chars):");
+			string text = await Game.GetUserInput("", 50); // i set max 50 chars here as example but it can be way more!
+			if (_item == noti3)
+			{
+				Notifications.ShowHelpNotification(text, 5000);
+			}
+			else if (_item == noti4)
+			{
+
+				_text = text;
+				_timer = Game.GameTime + 1;
+				Tick += FloatingHelpTimer;
+			}
+			else if (_item == noti5)
+			{
+				Notifications.ShowStatNotification(75, 50, text, true, true);
+			}
+			else if (_item == noti6)
+			{
+				Notifications.ShowVSNotification(Game.PlayerPed, HudColor.HUD_COLOUR_BLUE, HudColor.HUD_COLOUR_RED);
+				// you must specify 1 or 2 peds for this.. in this case i use the player ped twice for the sake of the example.
+			}
+			else if (_item == noti7)
+			{
+				_text = text;
+				_timer = Game.GameTime+1;
+				Tick += Text3DTimer;
+			}
+			else if (_item == noti8)
+			{
+				_text = text;
+				_timer = Game.GameTime + 1;
+				Tick += TextTimer;
+			}
+		};
+	}
+
+	private int _timer = 0;
+	private string _text = string.Empty;
+	public async Task Text3DTimer()
+	{
+		Notifications.DrawText3D(_text, Game.PlayerPed.Bones[Bone.SKEL_Head].Position + new Vector3(0, 0, 0.5f), Colors.WhiteSmoke);
+		if (Game.GameTime - _timer > 5000) // this is a tricky yet simple way to count time without using Delay and pausing the Thread ;)
+			Tick -= Text3DTimer;
+		await Task.FromResult(0);
+	}
+	public async Task TextTimer()
+	{
+		Notifications.DrawText(0.35f, 0.7f, _text);
+		if (Game.GameTime - _timer > 5000) // this is a tricky yet simple way to count time without using Delay and pausing the Thread ;)
+			Tick -= TextTimer;
+		await Task.FromResult(0);
+	}
+	public async Task FloatingHelpTimer()
+	{
+		Notifications.ShowFloatingHelpNotification(_text, Game.PlayerPed.Bones[Bone.SKEL_Head].Position + new Vector3(0, 0, 0.5f), 5000);
+		// this will show the 3d notification on the head of the ped in 3d world coords
+		if (Game.GameTime - _timer > 5000) // this is a tricky yet simple way to count time without using Delay and pausing the Thread ;)
+			Tick -= FloatingHelpTimer;
+		await Task.FromResult(0);
 	}
 
 	public void AddMenuCook(UIMenu menu)
@@ -241,7 +680,7 @@ public class MenuExample : BaseScript
 		{
 			if (item == listPanelItem1)
 			{
-				Screen.ShowNotification("Selected color " + ((item.Panels[0] as UIMenuColorPanel).CurrentSelection + 1) + "...");
+				Notifications.ShowNotification("Selected color " + ((item.Panels[0] as UIMenuColorPanel).CurrentSelection + 1) + "...");
 				item.Description = "Selected color " + ((item.Panels[0] as UIMenuColorPanel).CurrentSelection + 1) + "...";
 				item.Parent.UpdateDescription(); // this is neat.. this will update the description of the item without refresh index.. try it by changing color
 			}
@@ -290,10 +729,11 @@ public class MenuExample : BaseScript
 	public MenuExample()
 	{
 		_menuPool = new MenuPool();
-		var mainMenu = new UIMenu("Native UI", "~b~NATIVEUI SHOWCASE", true); // true means add menu Glare scaleform to the menu
+		var mainMenu = new UIMenu("Native UI", "~b~NATIVEUI SHOWCASE", new PointF(50, 50), true); // true means add menu Glare scaleform to the menu
 		_menuPool.Add(mainMenu);
 		HeritageMenu(mainMenu);
 		AddScaleformMenu(mainMenu);
+		NotificationShowdown(mainMenu);
 		AddMenuKetchup(mainMenu);
 		AddMenuFoods(mainMenu);
 		AddMenuCook(mainMenu);
@@ -301,15 +741,25 @@ public class MenuExample : BaseScript
 		HandleMenuEvents(mainMenu);
 		_menuPool.RefreshIndex();
 
+		// We create a marker on the peds position, adds it to the MarkerHandler
+		Marker playerMarker = new Marker(MarkerType.VerticalCylinder, Game.PlayerPed.Position, new Vector3(1.5f), 5f, Colors.Cyan);
+		MarkersHandler.AddMarker(playerMarker);
+
 		Tick += async () =>
 		{
 			_menuPool.ProcessMenus();
+
+			//If the player is in drawing range for the marker, the marker will draw automatically and the DrawText will show itself (true if the ped enters the marker)
+			if(playerMarker.IsInRange)
+				Notifications.DrawText($"IsInMarker => {playerMarker.IsInMarker}");
+
 			if (Game.IsControlJustPressed(0, Control.SelectCharacterMichael)) // Our menu on/off switch
 				mainMenu.Visible = !mainMenu.Visible;
+			await Task.FromResult(0);
 		};
 	}
 
-	public async void OpenCustomPauseMenu()
+	public void OpenCustomPauseMenu()
 	{
 		TabView MenuContainer = new TabView("This is the title", "Subtitle");
 		MenuContainer.SideStringTop = "Player_Name";

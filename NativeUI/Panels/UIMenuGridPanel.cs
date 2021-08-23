@@ -50,14 +50,14 @@ namespace NativeUI
 
 		internal override void Position(float y)
 		{
-			var ParentOffsetX = ParentItem.Offset.X;
-			var ParentOffsetWidth = ParentItem.Parent.WidthOffset;
-			Background.Position = new PointF(ParentOffsetX, y);
-			Grid.Position = new PointF(ParentOffsetX + 115.5f + (ParentOffsetWidth / 2), 37.5f + y);
-			Top.Position = new PointF(ParentOffsetX + 215.5f + (ParentOffsetWidth / 2), 5f + y);
-			Left.Position = new PointF(ParentOffsetX + 57.75f + (ParentOffsetWidth / 2), 120f + y);
-			Right.Position = new PointF(ParentOffsetX + 373.25f + (ParentOffsetWidth / 2), 120f + y);
-			Bottom.Position = new PointF(ParentOffsetX + 215.5f + (ParentOffsetWidth / 2), 240f + y);
+			float ParentOffsetX = ParentItem.Offset.X;
+			int ParentOffsetWidth = ParentItem.Parent.WidthOffset;
+			Background.Position = new PointF(ParentOffsetX, y + 35);
+			Grid.Position = new PointF(ParentOffsetX + 115.5f + (ParentOffsetWidth / 2), 72.5f + y);
+			Top.Position = new PointF(ParentOffsetX + 215.5f + (ParentOffsetWidth / 2), 40f + y);
+			Left.Position = new PointF(ParentOffsetX + 57.75f + (ParentOffsetWidth / 2), 155f + y);
+			Right.Position = new PointF(ParentOffsetX + 373.25f + (ParentOffsetWidth / 2), 155f + y);
+			Bottom.Position = new PointF(ParentOffsetX + 215.5f + (ParentOffsetWidth / 2), 275f + y);
 			if (!CircleLocked)
 			{
 				CircleLocked = true;

@@ -136,12 +136,9 @@ namespace NativeUI.PauseMenu
                 _header.CallFunction("SET_CHAR_IMG", HeaderPicture.Item1, HeaderPicture.Item2, true);
             else
 			{
-                int mugshot = API.RegisterPedheadshot(API.PlayerPedId());
-                while (!API.IsPedheadshotReady(mugshot)) await BaseScript.Delay(1);
-                string Txd = API.GetPedheadshotTxdString(mugshot);
-                HeaderPicture = new Tuple<string, string>(Txd, Txd);
-                API.ReleasePedheadshotImgUpload(mugshot);
-                _header.CallFunction("SET_CHAR_IMG", HeaderPicture.Item1, HeaderPicture.Item2, true);
+                var mugshot = await Notifications.GetPedMugshotAsync(Game.PlayerPed);
+                _header.CallFunction("SET_CHAR_IMG", mugshot.Item1, mugshot.Item2, true);
+                API.ReleasePedheadshotImgUpload(mugshot.Item1);
             }
             _header.CallFunction("SET_HEADING_DETAILS", SideStringTop, SideStringMiddle, SideStringBottom, false);
             _header.CallFunction("BUILD_MENU");
