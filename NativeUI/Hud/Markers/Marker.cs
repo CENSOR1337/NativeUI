@@ -93,12 +93,14 @@ namespace NativeUI
 			if (IsInRange && PlaceOnGround && (Position.Z != _height +0.1f))
 			{
 				if (GetGroundZFor_3dCoord(Position.X, Position.Y, Position.Z, ref _height, false))
-					Position = new Vector3(Position.X, Position.Y, _height + 0.1f);
+					Position = new Vector3(Position.X, Position.Y, _height + 0.03f);
 			}
 			World.DrawMarker(MarkerType, Position, Direction, Rotation, Scale, Color, BobUpDown, FaceCamera, Rotate);
-			float dist = Vector3.Distance(Position, MenuPool.PlayerPed.Position);
 
-			IsInMarker = dist <= (Scale / 2).X || dist <= (Scale / 2).Y || dist <= (Scale / 2).Z;
+			var inX = Vector3.Subtract(Position, MenuPool.PlayerPed.Position).LengthSquared() < Scale.X * Scale.X;
+			var inY = Vector3.Subtract(Position, MenuPool.PlayerPed.Position).LengthSquared() < Scale.Y * Scale.Y;
+			var inZ = Vector3.Subtract(Position, MenuPool.PlayerPed.Position).LengthSquared() < Scale.Z * Scale.Z;
+			IsInMarker = inX || inY || inZ;
 		}
 	}
 }
