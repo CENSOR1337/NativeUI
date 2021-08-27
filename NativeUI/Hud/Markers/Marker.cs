@@ -90,17 +90,14 @@ namespace NativeUI
 			// [Position.Z != _height] means that we make the check only if we change position
 			// but if we change position and the Z is still the same then we don't need to check again
 			// We draw it with _height + 0.1 to ensure marker drawing (like horizontal circles)
-			if (IsInRange && PlaceOnGround && (Position.Z != _height +0.1f))
+			if (IsInRange && PlaceOnGround && (Position.Z != _height + 0.1f))
 			{
 				if (GetGroundZFor_3dCoord(Position.X, Position.Y, Position.Z, ref _height, false))
 					Position = new Vector3(Position.X, Position.Y, _height + 0.03f);
 			}
 			World.DrawMarker(MarkerType, Position, Direction, Rotation, Scale, Color, BobUpDown, FaceCamera, Rotate);
-
-			var inX = Vector3.Subtract(Position, MenuPool.PlayerPed.Position).LengthSquared() < Scale.X * Scale.X;
-			var inY = Vector3.Subtract(Position, MenuPool.PlayerPed.Position).LengthSquared() < Scale.Y * Scale.Y;
-			var inZ = Vector3.Subtract(Position, MenuPool.PlayerPed.Position).LengthSquared() < Scale.Z * Scale.Z;
-			IsInMarker = inX || inY || inZ;
+			float distanceSquared = (Position - MenuPool.PlayerPed.Position).LengthSquared();
+			IsInMarker = distanceSquared < Math.Pow(Scale.X, 2) || distanceSquared < Math.Pow(Scale.Y, 2) || distanceSquared < Math.Pow(Scale.Z, 2);
 		}
 	}
 }
