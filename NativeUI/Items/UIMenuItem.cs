@@ -25,6 +25,10 @@ namespace NativeUI
 		public Color TextColor { get; set; }
 		public Color HighlightedTextColor { get; set; }
 
+        // Allows you to attach data to a menu item if you want to identify the menu item without having to put identification info in the visible text or description.
+        // Taken from MenuAPI (Thanks Tom).
+        public dynamic ItemData { get; set; }
+
 		private readonly Color _defaultColor = Color.FromArgb(20, 255, 255, 255);
 		private readonly Color _disabledColor = Color.FromArgb(163, 159, 148); // Why allocating memory for same color every time?
 
