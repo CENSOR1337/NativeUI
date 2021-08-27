@@ -54,6 +54,7 @@ namespace NativeUI
 			BobUpDown = bobUpDown;
 			Rotate = rotate;
 			FaceCamera = faceCamera;
+			PlaceOnGround = placeOnGround;
 			if (Rotate && FaceCamera)
 				Rotate = false;
 		}
@@ -78,6 +79,7 @@ namespace NativeUI
 			Color = color;
 			BobUpDown = bobUpDown;
 			Rotate = rotate;
+			PlaceOnGround = placeOnGround;
 			FaceCamera = faceCamera;
 			if (Rotate && FaceCamera)
 				Rotate = false;
@@ -88,9 +90,9 @@ namespace NativeUI
 			// [Position.Z != _height] means that we make the check only if we change position
 			// but if we change position and the Z is still the same then we don't need to check again
 			// We draw it with _height + 0.1 to ensure marker drawing (like horizontal circles)
-			if (IsInRange && PlaceOnGround && Position.Z != _height)
+			if (IsInRange && PlaceOnGround && (Position.Z != _height +0.1f))
 			{
-				if (GetGroundZFor_3dCoord(Position.X, Position.Y, Position.Z + 10f, ref _height, false) && _height != 0)
+				if (GetGroundZFor_3dCoord(Position.X, Position.Y, Position.Z, ref _height, false))
 					Position = new Vector3(Position.X, Position.Y, _height + 0.1f);
 			}
 			World.DrawMarker(MarkerType, Position, Direction, Rotation, Scale, Color, BobUpDown, FaceCamera, Rotate);
